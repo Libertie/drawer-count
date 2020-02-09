@@ -2,6 +2,13 @@
 
 require 'partials/header.view.php';
 
+$labels = [
+    'notes' => 'Banknotes',
+    'coins' => 'Coins',
+    'rolls' => 'Coin Rolls',
+    'rares' => 'Uncommon Currencies'
+];
+
 ?>
 <div class="container">
     <h1 class="mt-5">Drawer Count</h1>
@@ -12,24 +19,9 @@ require 'partials/header.view.php';
     <form>
         <?php foreach ($currency->denominations as $type => $variants) : ?>
 
-        <fieldset class="mb-3 denomination-wrapper">
+        <fieldset id="fieldset-<?= $type ?>" class="mb-3 denomination-wrapper<?= $type == 'rares' ? ' collapse' : '' ?>">
             <legend class="d-block <?= $sorts[$type] ?>">
-                <?php
-                switch ($type) {
-                    case 'notes':
-                        echo 'Banknotes';
-                        break;
-                    case 'coins':
-                        echo 'Coins';
-                        break;
-                    case 'rolls':
-                        echo 'Coin Rolls';
-                        break;
-                    case 'rares':
-                        echo 'Uncommon Currencies';
-                        break;
-                }
-                ?>
+                <?= $labels[$type] ?> 
             </legend>
 
             <?php foreach ($variants as $label => $value) : ?>
@@ -39,6 +31,15 @@ require 'partials/header.view.php';
         </fieldset>
 
         <?php endforeach; ?>
+        <a id="more-toggle"
+            class="btn btn-secondary"
+            data-toggle="collapse"
+            href="#fieldset-rares"
+            role="button"
+            aria-expanded="false"
+            aria-controls="type-rares">
+            Show more
+        </a>
     </form>
 
 </div>

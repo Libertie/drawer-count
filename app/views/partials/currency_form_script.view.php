@@ -12,5 +12,9 @@ $(document).ready(function(e) {
         locale: '<?= App::get('config')['localization']['number_format'] ?>',
         currency: '<?= $currency_symbol ?>'
     });
+
+    $('#fieldset-rares').on('shown.bs.collapse', function () {
+        $('#more-toggle').remove();
+    })
 });
 </script>
