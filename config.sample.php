@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     |   DATABASE CONNECTION
@@ -15,7 +14,6 @@ return [
         'password' => '',
         'connection' => '',
         'options' => [
-
         ]
     ],
 
@@ -24,7 +22,7 @@ return [
     |   CURRENCY & LOCALIZATION
     |--------------------------------------------------------------------------
     |
-    |   Here you can adjust the currency and number format for displaying 
+    |   Here you can adjust the currency and number format for displaying
     |   denominations of that currency.
     |
     |   Supported:
@@ -36,7 +34,6 @@ return [
     'localization' => [
         'currency_code' => 'usd',
         'number_format' => 'en-US'
-
     ],
 
     /*

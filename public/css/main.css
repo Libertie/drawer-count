@@ -1,0 +1,23 @@
+main {
+    margin-bottom: 6em;
+}
+legend {
+    cursor: pointer;
+}
+input[type=number] {
+    text-align: right;
+}
+legend:hover {
+    color: darkred;
+}
+.container {
+    max-width: 680px;
+}
+.asc:after {
+    content: "\21E1";
+    margin-left: .25em;
+}
+.desc:after {
+    content: "\21E3";
+    margin-left: .25em;
+}
