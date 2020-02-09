@@ -6,8 +6,8 @@
                 <div class="col-sm-8">
                 </div>
                 <div class="col-sm-4 text-right lead">
-                    Total: 
-                    <span id="calculator-sum">$0.00</span>
+                    Total: <span id="calculator-sum"></span><br>
+                    <small id="calculator-discrepancy" class="text-muted"></small>
                 </div>
             </div>
         </div>

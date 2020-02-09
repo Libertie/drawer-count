@@ -7,7 +7,7 @@
             <?= $label ?>
     </label>
 
-    <div class="col-sm-4">
+    <div class="col-8 col-sm-4">
         <input
             type="number"
             name="<?= $type . '[' . sprintf('%06d', $value * 100) . ']' ?>"
@@ -18,7 +18,7 @@
             dir="rtl">
     </div>
 
-    <div class="col-sm-4 text-right currency-ext">
+    <div class="col-4 col-sm-4 text-right currency-ext">
         $0.00
     </div>
 

@@ -17,6 +17,33 @@ $labels = [
     <hr>
 
     <form>
+
+
+        <div class="form-group row mb-1">
+
+            <label for="expected" class="col-sm-4 col-form-label">
+                Expected count
+            </label>
+
+            <div class="col-8 col-sm-4">
+                <input
+                    type="number"
+                    name="expected"
+                    id="expected"
+                    class="form-control currency-count"
+                    min=0
+                    step=.01
+                    dir="rtl">
+            </div>
+
+            <div class="col-4 col-sm-4 text-right">
+                <span class="form-text text-muted">Optional</span>
+            </div>
+
+        </div>
+
+        <hr>
+
         <?php foreach ($currency->denominations as $type => $variants) : ?>
 
         <fieldset id="fieldset-<?= $type ?>" class="mb-3 denomination-wrapper<?= $type == 'rares' ? ' collapse' : '' ?>">

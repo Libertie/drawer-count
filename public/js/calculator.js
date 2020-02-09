@@ -32,7 +32,6 @@ class Calculator {
 
     pretty(number) {
 
-        console.log(this.currency);
         return new Intl.NumberFormat(this.locale, {
             style: 'currency',
             currency: this.currency
@@ -51,8 +50,29 @@ class Calculator {
         });
 
         // Update the footer
+        this.display();
+    }
+
+    display() {
+
+        var expected = Math.round($('#expected').val() * 100);
+        var discrepancy = expected - this.total;
+
         $('#calculator-sum').text(this.pretty(this.total / 100));
 
+        // No expected specified
+        if (! expected) {
+            $('#calculator-discrepancy').text('');
+        // Expected specified, no discrepancy
+        } else if (expected && discrepancy == 0) {
+            $('#calculator-discrepancy').text('No discrepancy');
+        // Expected specified, short
+        } else if (expected && discrepancy > 0) {
+            $('#calculator-discrepancy').text('Short: ' + this.pretty(discrepancy / 100));
+        // Expected specified, over
+        } else if (expected && discrepancy < 0) {
+            $('#calculator-discrepancy').text('Over: ' + this.pretty(Math.abs(discrepancy / 100)));
+        }
     }
 
     updateRow(row) {
