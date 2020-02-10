@@ -9,13 +9,16 @@ require 'app/models/Database.php';
 require 'app/models/Currency.php';
 require 'app/controllers/AppController.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 
 // Construct the App Model
-new APP();
+$app = new APP();
+
+// Set error handling for debug mode
+if ($app->get('config')['debug']) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 // Load the App Controller home method
 (new AppController())->home();
