@@ -14,7 +14,7 @@ require 'app/controllers/AppController.php';
 $app = new APP();
 
 // Set error handling for debug mode
-if ($app->get('config')['debug']) {
+if ($app->get('debug')) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);

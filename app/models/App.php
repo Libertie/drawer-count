@@ -15,7 +15,13 @@ class App
             if (! file_exists('config.php')) {
                 throw new Exception();
             } else {
-                self::set('config', require 'config.php');
+                $config = require 'config.php';
+
+                // Load all config variables into the APP
+                foreach ($config as $variable => $value) {
+                    self::set($variable, $value);
+                }
+
             }
         } catch (Exception $e) {
             die('Config file does not exist. Please copy config.sample.php to config.php.');
@@ -23,7 +29,7 @@ class App
 
         // Load currency localization file
         try {
-            $currency = self::get('config')['localization']['currency_code'];
+            $currency = self::get('localization')['currency_code'];
             if (! file_exists('app/resources/currency/' . $currency . '.php')) {
                 throw new Exception();
             } else {

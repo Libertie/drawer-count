@@ -9,7 +9,7 @@ class AppController
     public function home()
     {
         // Get configured sort orders
-        $sorts = App::get('config')['display'];
+        $sorts = App::get('display');
 
         // Create a sorted currency object
         $currency = (new Currency(App::get('currency')))

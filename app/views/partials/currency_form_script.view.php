@@ -1,7 +1,7 @@
 <?php
 use \App\Models\App;
 
-$numberFormatter = new NumberFormatter(App::get('config')['localization']['number_format'], NumberFormatter::CURRENCY);
+$numberFormatter = new NumberFormatter(App::get('localization')['number_format'], NumberFormatter::CURRENCY);
 $currency_symbol = $numberFormatter->getSymbol(NumberFormatter::INTL_CURRENCY_SYMBOL);
 ?>
 
@@ -9,7 +9,7 @@ $currency_symbol = $numberFormatter->getSymbol(NumberFormatter::INTL_CURRENCY_SY
 <script>
 $(document).ready(function(e) {
     var calculator = new Calculator({
-        locale: '<?= App::get('config')['localization']['number_format'] ?>',
+        locale: '<?= App::get('localization')['number_format'] ?>',
         currency: '<?= $currency_symbol ?>'
     });
 
