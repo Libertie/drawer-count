@@ -1,3 +1,3 @@
 <?php
 
-require 'core/bootstrap.php';
+require 'app/bootstrap.php';

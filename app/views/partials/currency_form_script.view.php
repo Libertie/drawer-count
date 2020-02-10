@@ -1,5 +1,5 @@
 <?php
-use \App\Core\App;
+use \App\Models\App;
 
 $numberFormatter = new NumberFormatter(App::get('config')['localization']['number_format'], NumberFormatter::CURRENCY);
 $currency_symbol = $numberFormatter->getSymbol(NumberFormatter::INTL_CURRENCY_SYMBOL);

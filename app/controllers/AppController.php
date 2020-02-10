@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-use App\Core\App;
+use App\Models\App;
 use App\Models\Currency;
 
 class AppController
@@ -10,6 +10,7 @@ class AppController
     {
         // Get configured sort orders
         $sorts = App::get('config')['display'];
+
         // Create a sorted currency object
         $currency = (new Currency(App::get('currency')))
             ->sort($sorts);
