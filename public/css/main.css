@@ -21,3 +21,7 @@ legend:hover {
     content: "\21E3";
     margin-left: .25em;
 }
+
+.modal-title {
+    font-size: 1.5rem;
+}

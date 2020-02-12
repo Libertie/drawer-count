@@ -14,10 +14,16 @@ $labels = [
     <h1 class="mt-5">Drawer Count</h1>
     <p class="lead">Calculate your drawer value by specifying a count for each denomination.</p>
 
-    <hr>
+    <?php
+    if (isset($_SESSION['msg']) && !empty($_SESSION['msg'])) {
+        echo '<div class="alert alert-info">' . $_SESSION['msg'] . '</div>';
+        unset($_SESSION['msg']);
+    } else {
+        echo '<hr>';
+    }
+    ?> 
 
-    <form>
-
+    <form id="drawer-form" method="post">
 
         <div class="form-group row mb-1">
 
@@ -58,8 +64,9 @@ $labels = [
         </fieldset>
 
         <?php endforeach; ?>
+
         <a id="more-toggle"
-            class="btn btn-secondary"
+            class="btn btn-link d-block mx-auto"
             data-toggle="collapse"
             href="#fieldset-rares"
             role="button"
@@ -67,12 +74,17 @@ $labels = [
             aria-controls="type-rares">
             Show more
         </a>
+
+        <input id="drawer-total" name="total" type="hidden" value="0">
+        <input id="drawer-discrepancy" name="discrepancy" type="hidden" value="">
+
     </form>
 
 </div>
 <?php
 
 require 'partials/currency_form_script.view.php';
+require 'partials/modal.view.php';
 require 'partials/footer.view.php';
 
 ?>

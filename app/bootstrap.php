@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\App;
+use App\Models\Database;
 use App\Controllers\AppController;
 
 require 'app/functions.php';
@@ -19,6 +20,9 @@ if ($app->get('debug')) {
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 }
+
+// Construct the Database
+$app->set('database', new Database($app->get('database')));
 
 // Load the App Controller home method
 (new AppController())->home();
