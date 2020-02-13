@@ -1,11 +1,20 @@
 # drawer-count
+
 <a href="LICENSE" target="_blank">
     <img alt="Software License" src="https://img.shields.io/badge/license-GPL3-brightgreen.svg?style=flat-square">
 </a>
 
-A small app to count cash register drawers.
+A small app to count cash register drawers. Drawer and denomination counts can be preserved in a file database
+for later review or auditing purposes.
 
-## Compatability
+## Features
+
+* Drawer total and discrepancy calculation
+* Currency localization
+* Denomination sort customization
+* Historic count preservation and review
+
+## Compatibility
 
 Tested on Linux Mint in the latest Firefox.
 
@@ -15,7 +24,7 @@ Tested on Linux Mint in the latest Firefox.
 * SQLite 3
 * PDO Driver for SQLite 3
 
-### Getting Started
+## Getting Started
 
 Clone the repository in the current directory:
 
@@ -35,3 +44,5 @@ Run the app on your localhost:
 ```
 php -S localhost:8000 -t drawer-count/
 ```
+
+The app should now be available at [http://localhost:8000](http://localhost:8000)!
