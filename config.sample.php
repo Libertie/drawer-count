@@ -41,7 +41,7 @@ return [
     |
     |   Supported:
     |   currency code   must correspond to file in /app/resources/currency
-    |   number format   any RFC 4646 language tags
+    |   number format   any RFC 4646 language tags (eg en-US, en-GB)
     |
     */
 
