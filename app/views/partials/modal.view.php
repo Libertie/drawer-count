@@ -56,7 +56,7 @@ $currency_index = $currency->getDenominations(true);
                                         </td></tr>
                                         <?php foreach ($denominations as $denomination => $qty) : ?>
                                             <tr>
-                                                <td><?= $currency_index[$type][$denomination] ?></td>
+                                                <td><?= $currency_index[$type][$denomination] ?? 'Unknown' ?></td>
                                                 <td class="text-center"><?= $qty ?: '0' ?></td>
                                                 <td class="text-right">
                                                     <?= $currency->format(($qty ? ($qty * $denomination / 100) : 0)) ?>
