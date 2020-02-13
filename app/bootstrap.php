@@ -10,6 +10,8 @@ require 'app/models/Database.php';
 require 'app/models/Currency.php';
 require 'app/controllers/AppController.php';
 
+// Start session
+session_start();
 
 // Construct the App Model
 $app = new APP();

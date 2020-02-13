@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\App;
@@ -29,7 +30,7 @@ class AppController
     public function save()
     {
         $database = App::get('database');
-    
+
         $drawer = [
             'total' => $_POST['total'],
             'expected' => $_POST['expected'] ?: null,
@@ -43,8 +44,7 @@ class AppController
         ];
 
         if ($database->insertDrawer($drawer)) {
-            $_SESSION["msg"] = "Drawer count saved!";
+            redirect('/', 'Drawer count saved!');
         }
-
     }
 }
