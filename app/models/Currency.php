@@ -4,14 +4,20 @@ namespace App\Models;
 
 class Currency
 {
-    public function __construct($denominations)
+    private $denominations = [];
+    private static $formatter = null;
+    private static $symbol = 'USD';
+
+    public function __construct($denominations, $format)
     {
         $this->denominations = $this->splitCoins($denominations);
+        self::$formatter = new \NumberFormatter($format, \NumberFormatter::CURRENCY);
+        self::$symbol = self::$formatter->getSymbol(\NumberFormatter::INTL_CURRENCY_SYMBOL);
     }
 
     /*
     |
-    |   Sort currency denominations for display
+    |   Sort currency denominations
     |
     */
     public function sort($display)
@@ -56,5 +62,35 @@ class Currency
         );
 
         return array_filter($denominations);
+    }
+
+    /*
+    |
+    |   Format a number according to the localization settings
+    |
+    */
+    public function format($number)
+    {
+        return self::$formatter->format($number);
+    }
+
+    public function getDenominations($flip_array = false)
+    {
+        if (!$flip_array) {
+            return $this->denominations;
+        } else {
+            $r = $this->denominations;
+            return array_map(function (&$type) {
+                array_walk($type, function (&$item) {
+                    $item = sprintf('%06d', $item * 100);
+                });
+                return array_flip($type);
+            }, $r);
+        }
+    }
+
+    public function getSymbol()
+    {
+        return self::$symbol;
     }
 }

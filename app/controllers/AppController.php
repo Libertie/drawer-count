@@ -13,12 +13,12 @@ class AppController
             $this->save();
         }
 
-        // Get configured sort orders
-        $sorts = App::get('display');
-
-        // Create a sorted currency object
-        $currency = (new Currency(App::get('currency')))
-            ->sort($sorts);
+        // Create and then sort a currency object
+        $currency = (new Currency(
+            App::get('currency'),
+            App::get('localization')['number_format']
+        ))
+            ->sort(App::get('display'));
 
         // Get saved drawers
         $database = App::get('database');

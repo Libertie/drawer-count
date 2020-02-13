@@ -50,7 +50,7 @@ $labels = [
 
         <hr>
 
-        <?php foreach ($currency->denominations as $type => $variants) : ?>
+        <?php $currency->getDenominations(false); foreach ($currency->getDenominations() as $type => $variants) : ?>
 
         <fieldset id="fieldset-<?= $type ?>" class="mb-3 denomination-wrapper<?= $type == 'rares' ? ' collapse' : '' ?>">
             <legend class="d-block <?= $sorts[$type] ?>">
