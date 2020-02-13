@@ -9,23 +9,20 @@ $labels = [
     'rares' => 'Uncommon Currencies'
 ];
 
-?>
+if (isset($_SESSION['msg']) && !empty($_SESSION['msg'])) {
+    echo '<div class="alert alert-info text-center">' . $_SESSION['msg'] . '</div>';
+    unset($_SESSION['msg']);
+}
+
+?> 
 <div class="container">
+
     <h1 class="mt-5">Drawer Count</h1>
     <p class="lead">Calculate your drawer value by specifying a count for each denomination.</p>
 
-    <?php
-    if (isset($_SESSION['msg']) && !empty($_SESSION['msg'])) {
-        echo '<div class="alert alert-info">' . $_SESSION['msg'] . '</div>';
-        unset($_SESSION['msg']);
-    } else {
-        echo '<hr>';
-    }
-    ?> 
-
     <form id="drawer-form" method="post">
 
-        <div class="form-group row mb-1">
+        <div class="jumbotron form-group row my-4 px-3 py-3">
 
             <label for="expected" class="col-sm-4 col-form-label">
                 Expected count
@@ -48,9 +45,7 @@ $labels = [
 
         </div>
 
-        <hr>
-
-        <?php $currency->getDenominations(false); foreach ($currency->getDenominations() as $type => $variants) : ?>
+        <?php foreach ($currency->getDenominations() as $type => $variants) : ?>
 
         <fieldset id="fieldset-<?= $type ?>" class="mb-3 denomination-wrapper<?= $type == 'rares' ? ' collapse' : '' ?>">
             <legend class="d-block <?= $sorts[$type] ?>">

@@ -18,7 +18,7 @@ class AppController
             App::get('currency'),
             App::get('localization')['number_format']
         ))
-            ->sort(App::get('display'));
+            ->sort($sorts = App::get('display'));
 
         // Get saved drawers
         $database = App::get('database');
