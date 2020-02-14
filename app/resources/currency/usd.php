@@ -10,7 +10,7 @@ return [
         'Hundred dollar bill' => 100
     ],
     'coins' => [
-        'Cent' => [.01, .5],
+        'Penny' => [.01, .5],
         'Nickel' => [.05, 2],
         'Dime' => [.1, 5],
         'Quarter' => [.25, 10]
