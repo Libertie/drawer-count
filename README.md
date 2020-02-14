@@ -4,8 +4,7 @@
     <img alt="Software License" src="https://img.shields.io/badge/license-GPL3-brightgreen.svg?style=flat-square">
 </a>
 
-A small app to count cash register drawers. Drawer and denomination counts can be preserved in a file database
-for later review or auditing purposes.
+A small app to count cash register drawers. Drawer and denomination counts can be preserved in a file database for later review or auditing purposes.
 
 ## Features
 
@@ -23,6 +22,9 @@ Tested on Linux Mint in the latest Firefox.
 * PHP 7+
 * SQLite 3
 * PDO Driver for SQLite 3
+* PHP-Intl Extension
+
+In a vanilla Ubuntu installation, you may be able to add all dependencies with `sudo apt install git php sqlite php-sqlite3 php-intl`.
 
 ## Getting Started
 
