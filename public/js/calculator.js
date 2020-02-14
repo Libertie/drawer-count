@@ -28,6 +28,18 @@ class Calculator {
         // Run an initial calculation
         this.calculate(true);
 
+        // Disable submit with ENTER
+        $('#drawer-form').keypress(
+            function (event) {
+                if (event.which == '13') {
+                    event.preventDefault();
+                }
+            }
+        );
+
+        // Prevent submit of 0 count
+        $('#drawer-submit').prop('disabled', true)
+
     }
 
     pretty(number) {
@@ -53,6 +65,14 @@ class Calculator {
         $("#drawer-total").val(this.total / 100);
         // Calculate and display the discrepancy
         this.display();
+
+        // Toggle submit, disable when form is empty
+        if (this.total > 0) {
+            $('#drawer-submit').prop('disabled', false)
+        } else {
+            $('#drawer-submit').prop('disabled', true)
+        }
+
     }
 
     display() {
@@ -64,22 +84,23 @@ class Calculator {
         $('#calculator-sum').text(this.pretty(this.total / 100));
 
         // No expected specified
-        if (! expected) {
+        if (!expected) {
             $('#calculator-discrepancy').text('');
             $("#drawer-discrepancy").val('');
-        // Expected specified, no discrepancy
+            // Expected specified, no discrepancy
         } else if (expected && discrepancy == 0) {
             $('#calculator-discrepancy').text('No discrepancy');
             $("#drawer-discrepancy").val(0);
-        // Expected specified, short
+            // Expected specified, short
         } else if (expected && discrepancy > 0) {
             $('#calculator-discrepancy').text('Short: ' + this.pretty(discrepancy));
             $("#drawer-discrepancy").val(discrepancy);
-        // Expected specified, over
+            // Expected specified, over
         } else if (expected && discrepancy < 0) {
             $('#calculator-discrepancy').text('Over: ' + this.pretty(Math.abs(discrepancy)));
             $("#drawer-discrepancy").val(discrepancy);
         }
+
     }
 
     updateRow(row) {
@@ -91,6 +112,7 @@ class Calculator {
         $(row).find('.currency-ext').text(this.pretty(rowValue / 100));
 
         return rowValue;
+
     }
 
     reorder(legend) {

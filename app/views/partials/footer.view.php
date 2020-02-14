@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-4">
-                    <button type="submit" form="drawer-form" class="btn btn-primary">Record</button>
+                    <button id="drawer-submit" type="submit" form="drawer-form" class="btn btn-primary">Record</button>
                 </div>
                 <div class="col-4 text-center">
                     <a href="#"
