@@ -28,11 +28,12 @@ class Calculator {
         // Run an initial calculation
         this.calculate(true);
 
-        // Disable submit with ENTER
-        $('#drawer-form').keypress(
+        // Treat ENTER as TAB to navigate form
+        $('.currency-count').keypress(
             function (event) {
                 if (event.which == '13') {
                     event.preventDefault();
+                    $('input, select, textarea')[$('input,select,textarea').index(this) + 1].focus();
                 }
             }
         );
