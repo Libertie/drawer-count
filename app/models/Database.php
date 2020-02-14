@@ -4,12 +4,23 @@ namespace App\Models;
 
 class Database
 {
+    protected $db_file = 'app/resources/database.sqlite';
     protected $pdo;
 
     public function __construct($config)
     {
+        // If a database file does not exist, create it
+        if (!is_file($this->db_file)) {
+            if (!touch($this->db_file)) {
+                die('Error: Database file "'
+                    . $this->db_file
+                    . '" could not be created. Please check folder permissions.');
+            }
+        }
+
+        // Attempt to use the file as a data source
         try {
-            $this->pdo = new \PDO('sqlite:app/resources/database.sqlite');
+            $this->pdo = new \PDO('sqlite:' . $this->db_file);
         } catch (\PDOException $e) {
             die('Error: ' . $e->getMessage());
         }
