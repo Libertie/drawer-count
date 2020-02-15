@@ -16,6 +16,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    |   DATABASE FILE
+    |--------------------------------------------------------------------------
+    |
+    |   Here you can specify the location of the database file. If a file does
+    |   not exist at this location, drawer-count will attempt to create one.
+    |
+    */
+
+    'database' => 'app/resources/database.sqlite',
+
+    /*
+    |--------------------------------------------------------------------------
     |   CURRENCY & LOCALIZATION
     |--------------------------------------------------------------------------
     |
