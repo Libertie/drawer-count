@@ -1,16 +1,16 @@
 
-<div class="form-group row mb-1" data-val=<?= $value * 100 ?>>
+<div class="form-group row mb-1" data-val=<?= $denomination->worth() ?>>
 
     <label
-        for="<?= $id = $type . '-' . sprintf('%06d', $value * 100) ?>"
+        for="<?= $id = $type . '-' . sprintf('%06d', $denomination->worth()) ?>"
         class="col-sm-4 col-form-label">
-            <?= $label ?>
+            <?= $denomination->name() ?>
     </label>
 
     <div class="col-8 col-sm-4">
         <input
             type="number"
-            name="<?= $type . '[' . sprintf('%06d', $value * 100) . ']' ?>"
+            name="<?= $type . '[' . sprintf('%06d', $denomination->worth()) . ']' ?>"
             id="<?= $id ?>"
             class="form-control currency-count"
             min=0

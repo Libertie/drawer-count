@@ -63,7 +63,7 @@ class Calculator {
         });
 
         // Update the hidden total field
-        $("#drawer-total").val(this.total / 100);
+        $("#drawer-total").val(this.total);
         // Calculate and display the discrepancy
         this.display();
 
@@ -79,7 +79,7 @@ class Calculator {
     display() {
 
         var expected = Math.round($('#expected').val() * 100);
-        var discrepancy = (expected - this.total) / 100;
+        var discrepancy = this.total - expected;
 
         // Update the total in the footer
         $('#calculator-sum').text(this.pretty(this.total / 100));
@@ -88,17 +88,17 @@ class Calculator {
         if (!expected) {
             $('#calculator-discrepancy').text('');
             $("#drawer-discrepancy").val('');
-            // Expected specified, no discrepancy
+        // Expected specified, no discrepancy
         } else if (expected && discrepancy == 0) {
             $('#calculator-discrepancy').text('No discrepancy');
             $("#drawer-discrepancy").val(0);
-            // Expected specified, short
-        } else if (expected && discrepancy > 0) {
-            $('#calculator-discrepancy').text('Short: ' + this.pretty(discrepancy));
-            $("#drawer-discrepancy").val(discrepancy);
-            // Expected specified, over
+        // Expected specified, short
         } else if (expected && discrepancy < 0) {
-            $('#calculator-discrepancy').text('Over: ' + this.pretty(Math.abs(discrepancy)));
+            $('#calculator-discrepancy').text('Short: ' + this.pretty(Math.abs(discrepancy / 100)));
+            $("#drawer-discrepancy").val(discrepancy);
+        // Expected specified, over
+    } else if (expected && discrepancy > 0) {
+            $('#calculator-discrepancy').text('Over: ' + this.pretty(discrepancy / 100));
             $("#drawer-discrepancy").val(discrepancy);
         }
 

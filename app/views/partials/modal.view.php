@@ -1,5 +1,6 @@
 <?php
-$currency_index = $currency->getDenominations(true);
+use App\Models\App;
+use App\Models\Drawer;
 
 ?>
 <div id="history-modal" class="modal" tabindex="-1" role="dialog">
@@ -13,31 +14,41 @@ $currency_index = $currency->getDenominations(true);
             </div>
             <div class="accordion" id="accordion">
                 <?php foreach ($drawers as $drawer) : ?>
+                <?php
+                $drawer = new Drawer(App::get('currency'), [
+                    'id' => $drawer['id'],
+                    'total' => $drawer['total'],
+                    'expected' => $drawer['expected'],
+                    'discrepancy' => $drawer['discrepancy'],
+                    'counts' => $drawer['details'],
+                    'created' => $drawer['created']
+                ]);
+                ?>
                 <div class="card">
-                    <div class="card-header" id="heading-<?= $drawer['id'] ?>">
+                    <div class="card-header" id="heading-<?= $drawer->id ?>">
                         <h2 class="mb-0">
                             <a class="btn btn-link"
                                 data-toggle="collapse"
-                                data-target="#collapse-<?= $drawer['id'] ?>"
-                                aria-controls="collapse-<?= $drawer['id'] ?>">
-                                    #<?= sprintf('%04d', $drawer['id']) ?>
+                                data-target="#collapse-<?= $drawer->id ?>"
+                                aria-controls="collapse-<?= $drawer->id ?>">
+                                    #<?= sprintf('%04d', $drawer->id) ?>
                                     &ndash;
-                                    <?= date('D, F jS, Y \a\t g:ia', strtotime($drawer['created'])) ?>
+                                    <?= date('D, F jS, Y \a\t g:ia', strtotime($drawer->created)) ?>
                             </a>
                         </h2>
                     </div>
 
-                    <div id="collapse-<?= $drawer['id'] ?>"
+                    <div id="collapse-<?= $drawer->id ?>"
                         class="collapse"
-                        aria-labelledby="heading-<?= $drawer['id'] ?>"
+                        aria-labelledby="heading-<?= $drawer->id ?>"
                         data-parent="#accordion">
                             <div class="card-body">
                                 <p>
-                                    Total: <?= $currency->format($drawer['total']) ?> 
-                                    <?php if ($drawer['expected']) : ?>
-                                    <br>Expected: <?= $currency->format($drawer['expected']) ?>
+                                    Total: <?= App::formatCurrency($drawer->total) ?> 
+                                    <?php if ($drawer->expected) : ?>
+                                    <br>Expected: <?= App::formatCurrency($drawer->expected) ?>
                                     <br>Discrepancy: 
-                                    <?= $currency->format($drawer['discrepancy']) ?>
+                                    <?= App::formatCurrency($drawer->discrepancy) ?>
                                     <?php endif; ?>
                                 </p>
                                 <table class="table table-sm">
@@ -49,17 +60,17 @@ $currency_index = $currency->getDenominations(true);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach (json_decode($drawer['details'], true) as $type => $denominations) : ?>
-                                        <?php if (array_sum($denominations)) : ?>
+                                        <?php foreach ($drawer->denominationTypes() as $type) : ?>
+                                        <?php if ($drawer->checkDenomination($type)) : ?>
                                         <tr><td colspan="3" class="text-muted text-uppercase pt-3">
                                             <small><?= ucwords($type) ?></small>
                                         </td></tr>
-                                        <?php foreach ($denominations as $denomination => $qty) : ?>
+                                        <?php foreach ($drawer->denominations($type) as $denomination) : ?>
                                             <tr>
-                                                <td><?= $currency_index[$type][$denomination] ?? 'Unknown' ?></td>
-                                                <td class="text-center"><?= $qty ?: '0' ?></td>
+                                                <td><?= $denomination->name() ?></td>
+                                                <td class="text-center"><?= $denomination->quantity() ?: '0' ?></td>
                                                 <td class="text-right">
-                                                    <?= $currency->format(($qty ? ($qty * $denomination / 100) : 0)) ?>
+                                                    <?= App::formatCurrency($denomination->sum() ?: '0') ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

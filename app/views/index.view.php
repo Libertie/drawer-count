@@ -45,19 +45,24 @@ if (isset($_SESSION['msg']) && !empty($_SESSION['msg'])) {
 
         </div>
 
-        <?php foreach ($currency->getDenominations() as $type => $variants) : ?>
+        <?php foreach ($drawer->denominationTypes() as $type) : ?>
+        <?php if ($drawer->denominations($type)) : ?>
 
-        <fieldset id="fieldset-<?= $type ?>" class="mb-3 denomination-wrapper<?= $type == 'rares' ? ' collapse' : '' ?>">
+        <fieldset
+            id="fieldset-<?= $type ?>"
+            class="mb-3 denomination-wrapper<?= $type == 'rares' ? ' collapse' : '' ?>">
+
             <legend class="d-block <?= $sorts[$type] ?>">
                 <?= $labels[$type] ?> 
             </legend>
 
-            <?php foreach ($variants as $label => $value) : ?>
+            <?php foreach ($drawer->denominations($type) as $denomination) : ?>
             <?php require 'partials/currency_form_group.view.php'; ?> 
             <?php endforeach; ?>
 
         </fieldset>
 
+        <?php endif; ?>
         <?php endforeach; ?>
 
         <a id="more-toggle"

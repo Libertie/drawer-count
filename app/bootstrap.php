@@ -7,7 +7,8 @@ use App\Controllers\AppController;
 require 'app/functions.php';
 require 'app/models/App.php';
 require 'app/models/Database.php';
-require 'app/models/Currency.php';
+require 'app/models/Denomination.php';
+require 'app/models/Drawer.php';
 require 'app/controllers/AppController.php';
 
 // Start session

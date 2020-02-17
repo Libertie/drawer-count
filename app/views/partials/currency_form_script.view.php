@@ -8,7 +8,7 @@ use \App\Models\App;
 $(document).ready(function(e) {
     var calculator = new Calculator({
         locale: '<?= App::get('localization')['number_format'] ?>',
-        currency: '<?= $currency->getSymbol() ?>'
+        currency: '<?= App::get('currency_symbol') ?>'
     });
 
     $('#fieldset-rares').on('shown.bs.collapse', function () {
